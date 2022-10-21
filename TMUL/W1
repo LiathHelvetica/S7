@@ -1,0 +1,283 @@
+Zajęcia o 08:30
+
+Zaliczenie wykładu
+
+Zaliczenie - dwa ostatnie wykłady
+Przedmiot nieegzaminowy
+
+Sugestia aby chodzić na wykłady, bo bonusy
+
+Trzeba zaliczyć obydwie części
+
+Wykład: 55% oceny
+Projekt: 45% oceny
+
+Pytania otwarte
+raczej 4
+50% zalicza
+Raczej ogólne
+"Nie będzie za trucnych pytań"
+
+Projekt można wcześniej zaliczyć
+Wykładu nie
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Agenda:
+
+Interfejsy mózg-komputer
+Sygnały dźwiękowe (dźwięk jest jednym z najtrudniejszych sygnałów do obróbki - natura odbierania dźwięku, ułomność modeli ucha)
+Przetworniki obrazów świetlnych
+Obrazy stałe
+Obrazy ruchome (wyrywkowo)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Interfejs mózg-komputer (BCI)
+
+Odczyt (inwazyjny lub nieinwazyjny) sygnałów EEG
+Inwazyjny odpada XD
+
+Metody nieinwazyjne są wadliwe
+Jak rozmieszczać elektrody
+Jak zapewnić styk elektrody z głową (żele)
+Żele słabną z czasem
+
+Neurofeedback - Urządzenia wspomagające koncentracje
+Np. opaska z elektrodą, z tyłu głowy, bo łatwo odczytać, fala alfa jeśli dziecko jest spokojne
+
+Wykrywanie emocji, kłamstw
+Wykrywanie emocji mogłoby wspomóc współpracę z komputerem (to nie jest już fikcja, ale to potrafi raczkować; najgorzej, że trzeba być w czepku z elektrodami)
+
+Odciski mózgu
+Pewien schemat fal mógłby być użyty do przewidywania potencjału (genom)
+
+Biometryka EEG 
+Fale EEG mogą być jak odcisk palca
+Raczkujący temat
+Pewne unikalne schematy daje się wyłapywać
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Mózg (sygnał) -> Aktywizacja sygnału (elektrodą) -> Przetwarzanie wstępne -> Estrakcja cech -> Selekcja cech -> Klasyfikacja -> Interfejs użytkownika -> Neurofeedback
+
+Przetwarzanie wstepne - wyłonienie użytecznych fragmentów sygnału, szumu
+
+Ekstrakcja cech (A) - wyłonienie cech
+
+Selekcja cech (B) - wybór najbardziej znaczących cech
+
+Klasyfikacja (C) - odniesienie się do prolemu
+
+Interfejs użytkownika - komputer, ekran
+
+A, B, C mogą być złączone przez sieć neuronową - jeden etap tj.
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Przedwzmacniacz, wzmacniacz EEG
+
+Wzmaczniacze są drogie
+
+Elektrody działaja mimo włosów
+
+Miska z żelem, w środku srebro (metale szlachetne ogólnie)
+
+Na zewnątrz ceramika
+
+Wstępny wzmacniacz per elektroda
+
+Każda elektroda jest podpisana
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Fale mózgowe
+
+Delta - 30 - 40 Hz (myślano, że nie warto poświęcać im uwagi; kiedyś je wycinano)
+Beta - 13 - 30 Hz
+Alfa - 8 - 13 Hz (wygląda trochę jak sin(sin))
+Theta - 4 - 8 Hz (faza marzeń sennych, medytacja po długim treningu ew. psychotropy)
+Delta - 0.5 - 4 Hz (naturalnie występują podczas snu)
+Piki - powyżej (epilepsja - neurony nadają na podobnej częstotliwości; w podobny sposób)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Zakłócanie sygnału od podstawowych ruchów mięśniowych
+Duża unikalność
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Wstępne przetwarzanie sygnałów EEG
+
+Ręczne filtrowanie sygnałów - jest to jakaś metoda, dobra dla krótszych pomiarów
+
+Filtracja pasmowoprzepustowa (BPF)
+ - dobór pasma częstotliwości
+ 
+Wybielanie sygnału (SW)
+
+Analiza składowych niezależnych (ICA)
+popularne 10 lat temu
+Pomieszane sygnały z różnych źródeł
+Chcemy odseparować
+Przy pewnych warunkach to się udaje (ciężko je spełnić)
+Używane do odrzucenia artefaktu mrugania oczami
+Cięzko odrzucić części mózgu
+
+Wspólne wzorce przestrzenne
+One są lepsze do odseparowywania obszarów mózgu
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+ICA - ślepa separacja sygnału
+
+M1                  M2
+
+
+
+
+
+ 
+      Os1 i Os2
+      
+Osoba 1 mówi do M1, Osoba 2 do M2
+Jak odseparować te sygnały
+
+Algorytm rozdzielający - fastICA
+Prosty (w porównaniu do innych) i szybko działa
+
+Wiadomo, że są haczyki
+
+M1                       M2
+
+
+
+
+
+
+
+Os1                      Os2
+
+O dziwo to jest już scenariusz bardziej problematyczny
+W trakcie różnicy w docieraniu sygnałów - opóźnienei - opóźnienie w próbkach + mniejsza amplituda w dalszym mikrofonie
+Ułamek sekundy opóźnienia
+I to przestaje działać (zupełnie)
+
+Warunek konieczny aby sygnały nie miały opóźnień, ew. równe opóźnienia - trudne do spełnienia
+Nawet parę próbek różnicy (jedna) popsuje sprawę
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Algorytm duet - spektrogram + minimalizacja pewnej funkcji
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Ekstrakcja cech
+
+Energia sygnału (VAR)
+dobór pasm częstotliwości
+
+Transformata Fouriera
+Które częstotliwości są najlepiej reprezentowane w widmie
+
+########################
+Przy użyciu poprzednich próbujemy przewidzieć kolejne sygnały
+
+Statystyki wyższych rzędów detali transformaty falkowej
+dobór liczby detali
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Selekcja cech - algorytmy
+
+Metody brutalnej siły i rankingowe
+
+BS - klasyfikacja, dobór najlepszego zestawu
+
+R - Wspóóczynnik k-fishera
+R - t-statystyka
+
+BS - #########
+BS - ########
+BS - #######
+BS - ########
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Klasyfikacja - algorytmy
+
+######
+######
+######
+######
+######
+######
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+3 paradygmaty na których opiera się działanie iterfejsów m-k
+
+Korowe potencjały wzrokowe (SSVEP)
+
+Potencjały mózgowe skojarzone z ruchem - najmniej popularna, bo "nie działa" XD
+
+Potencjały wywołane - najbardziej popularna
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+SSVEP - 3 diody mrugające z różnymi częstotliwościami, zbliżonymi
+Zbieramy dane z tyły głowy (tam zbieramy dane od wzroku)
+Liczymy transformatę Fouriera z EEG w pewnych oknach czasowych
+
+Można rozpoznać na co typ patrzy, na której diodzie sie skupia
+
+Można w ten sposób sterować czymś. Wzrok steruje 
+
+Skuteczność 99% tego interfejsu w zależności od skupienia
+6 decyzji na minutę - długo
+
+Zaleta: Łatwy do nauki dla uzytkownika, intuicyjny
+Wada: Irytujący dla oczu
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Potencjały mózgowe skojarzone z ruchem
+
+Może działać w sposób ciągły
+
+W momencie gdy wykonujemy ruch to pewne obszary mózgu są aktywowane
+Najczęściej stosowane: ruch dłoni, języka, nogi
+
+Poruszanie pięścią daje ten sam efekt co wyobrażenie ruchu pięścią
+
+Zastosowanie: Osoby niepełnosprawne, osoby z kontuzjami (feedback rehabilitacji) 
+
+Wada: Dużo koncentracji i skupienia
+
+Interfejs asynchroniczny - coś myślimy, wybieramy fragment i szukamy wzorca, powtórz - ciągła klasyfikacja
+
+Klasyfikacja jest bardzo trudna i zależy od ogólnych predyspozycji i skupienia
+(uśrednianie spektrogramu)
+
+Skuteczność 81% - wymaga treningu
+
+Swego czasu był boom, potem trochę podumarł, podobno ożywa
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Potencjał wywołany
+wzrokowy (mrugnięcie), słuchowy, somatosensoryczny
+
+Po boźcu następuje pik
+Wykrywanie piku
+Pik jest charakterystyczny dla osoby
+
+Mała amplituda
+
+Najczęsciej odczytuje się go z płatu ciemieiowego (czubek głowy)
+
+9 decyzji na minutę, 98% skuteczności (zależy od koncnetracji)
+
+Hawking pisał książki tą metodą
+
+

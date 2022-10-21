@@ -1,0 +1,193 @@
+Kontynuacja dźwięku
+
+Problemy przetworników - zniekształcenia
+ - przesunięcie fazowe
+ - szum - dodatkowe sinusoidy z innynmi częstotliwościami (wielokrotności częstotliwości wyjściowej - 2f, 3f, 4f ...) - zniekształcenia harmoniczne - współczynnik zawartości harmonicznych - jaką moc generują fałszywe częstotliwości
+ 
+Ucho - istrument nieliniowy
+Dźwięk jest specyficznie odbierany przez ucho - tradycyjne metody nie są wystarczające
+Ocena jakości jest subiektywna
+Procesy optymalizacyjne muszą uwzględniać średnią ze społeczeństwa
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Mikrofony, karty dźwiękowe
+
+Podziały
+ - w jaki sposób dźwięk wchodzi w interakcję z mikrofonem
+ - ######
+ 
+Podpodziały
+ - ######
+ 
+Mikrofony dynamiczne
+ 
+Mikrofony pojemnościowe mogą być ogólne ale często są pod konkretny cel
+drogie, ale precyzyjne
+Wymaga dodatkowego napięcia zasilającego
+ 
+Mikrofony elektretowe
+Proste, używane w komputerach, tanie
+Różnie z jakością dźwięku, najczęściej słabo
+
+Mikrofony ciśnieniowe
+oddziaływanie pola akustycznego na membranę
+membrana - obudowana z jednej strony - dźwięk może oddziaływać nie ze wszystkimi stronami
+Charakterystyka kierunkowości mimo to jest kołowa (odbiera dźwięk z dowolnej storny) - odbicia w pomieszczeniach
+
+Mikrofony gradientowe
+Brak obudowanej membrany
+Pozycja mówiącego ma znaczenie
+Działa w oparciu o różnicę ciśnień akustycznych - to działa najgorzej gdy mówi się wzdłuż membrany
+Charakterystyka kierunkowości ósemkowa (gruby bałwan)
+
+Mikrofon ciśnieniowy z dziurką - chybryda - mikrofon ciśnieniowo-gradientowy - dostosowanie charakterystyki
+Charakterystyka kardioidalna, superkarioidalna, hiperkarioidalna
+
+Mikrofony dynamiczne - wokale
+ - cewkowe - odwrócenie głośnika - membrana, cewka, magnes - membrana, drga, przenosi na cewkę, indukcja w polu magnetycznym, sygnał
+ - wstęgowe - wstęga, magnes, transformator - ciut bardziej czułe, ale ciut bardziej szumne
+ 
+Mikrofony pojemnościowe - specyficzne cele, orkiestry
+ - z polaryzacją zewnętrzną - kondensator z jedną okładką będącą membraną - ona może się zniekształcać w polu akustycznym - jak zmienia położenie to zmienia się pojemność kondensatora - wymaga napięcia polaryzującego (fantomowego) - wymaga dodatkowego napięcia 
+ - z polaryzacją wewnętrzną (elektretowe) - same w sobie spolaryzowane, nie wymagają napięcia zasilającego, reszta działania jest podobna, ładunek zaszydty na sztywno, mniejsza czułość
+
+Mikrofon - urządzenie monofoniczne
+ale mają często wtyczki stereofoniczne - Karty SoundBlaster, dodatkowe napięcie zasilające mikrofon
+
+charakterystyka częstotliwościowa mikrofony
+Najlepiej jeśli będzie to linia prosta/płaska - nigdy tak nie będzie
+tym szczególnie, że te charakterystyki często są kształtowane do konkretnych celów
+
+Czułość
+ - napięcie dla danego ciśnienia akustyczneo
+ 
+Impedancja
+ - #####
+ 
+Mikrofony stereofoniczne
+ - zestawienie dwóch różnych mikrofonów
+ - wiele technik ma teraz wygasłe patenty
+
+Technika XY 
+Skrzyżowane mikrofony o charakterystykach ósemkowych - dobrze zbiera po kątach (w kształcie X)
+ - odwracają się ścieżki po połdniu (w porównaniu do północy)
+Usprawnienia - skrzyżowanie kardioidalnych, superkarioidalnych
+
+Technika MS
+Dwa mikrofony ósemkowe, w kształt +
+Usprawnienia - charakterystyka kołowa (przód) + ósemkowa (boki)
+
+Technika AB
+Dwa mikrofony oddalone od siebie, o takich samych charakterystykach, źródło dźwięku pomiędzy nimi
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+System cyfrowego przetwarzania sygnału fonicznego
+
+Przetwornik Analog - Cyfra
+(...)
+
+Filtr antialiasingowy
+ - twierdzenie o próbkowaniu
+ - jeżeli próbkujemy na za małejczęstotliwości to stosujemy filtr AA
+ - ograniczenie pasma częstotliwośi do połowy częstotliwości próbkowania
+ - inaczej pojawiłyby się fałszywe częstotliwości (słyszalne z gruntu)
+ - filtr AA wygładza sygnał
+ 
+Filtr AA -> przetwornik AC -> liczby -> zapis
+
+zapis -> przetwornik CA -> filtr AA (wygładzenie sygnału ze schodków) -> wyjście
+
+Przetwornik AC
+ - równoległy - komparatory z drabinką rezystancyjną + koder - parametrem jest liczba komparatorów (bitowość)
+ - signa-delta - (1 bitowe) - porównanie próbek ze sprzężeniem zwrotnym - integrator -> komparator -> odczyt różnic modułowych - niektórzy mówią, że te przetworniki bywają lepsze
+ 
+Zniekształcenie na 8 bitowych przetwornikach 
+Współcześnie sięga się po 16 i 24 bitowe
+
+Kodowanie PCM - kodowanie dźwięku - pulse code modulation
+Próbki sygnału skwantowane
+To wprowadza zniekształcenia
+Próbkowanie okresla pasmo
+Szum kwantyzacji - mało słyszalny na 8 bitach, praktycznie niesłyszalny wyżej
+
+Za mała częstotliwość kwantyzacji - wygładzony sygnał, błąd praktycznie zerowy w punktach pomiaru, brzmi gorzej
+
+Ograniczenie przedziałów kwantyzacji - szum, błędy w punktach pomiaru, szum jest na granicy słyszalności na 256 przedziałach (8bit liczba)
+
+Ponieważ głośnik jest też filtrem dolnoprzepustowym to nawet sygnał zero-jedynkowi (2 przedziały kwantyzacji) - słychać byłoby turbo trzaski, ale dalej coś możnaby zrozumieć (zaskakujące)
+
+Metoda PCM - może być na kolosie
+
+Karty dżwiękowe - 
+Pierwsze karty dżwiękowe - AdLib - procesor #####
+Syntetyczne odtwarzanie dźwięku na 9-11 kanałów - Synteza FM (obecnie też są takie metody wykorzystywane) - wykorzystywane w grach
+
+Synteza FM
+ - modulacja pewnych fal
+ - podstawowa fala (sinusoida z częstotliwością nośną, modulowana drugą sinusoidą) - amplituda też mogła być kształtowana
+ - operatory - generator częstotliwości nośnej, obwiedni, wzmacniacz fali modulowanej (zmiana paramterów),
+ - operatory można było łączyć ze sobą - tak powstawał sygnał wyjściowy
+ 
+Obwiednia ADSR
+
+Do syntezy wykorzystywano również szum
+
+Uzyskanie "bębnów" było niemożliwe tą metodą 
+
+
+1988 - Creative Music Systems - Game Blaster
+Dodatek dżwięku stereo
+12 kanałów + 3 kanały perkusyjne
+
+1989 - Sound Blaster - monofoniczna z przetwornikami AC i CA 8 bit
+Przenoszenie między mikrofonem, komputerem, głośnikiem
+
+1992 - Sound Blaster 16 - przetworniki 16 bit 
+moduł Wave Blaster 
+synteza Wave Table - pamięć karty z zapisem rzeczywistych dźwięków, one były używane do syntezy a nie sinusiody, wymienialne pamięci 
+4MB próbek w wave table
+Modele z i bez Wave Table - drogie
+
+1994 - zintegrowana tablica falek - Sound Blaster AVE32
+
+1998 - wielokanałowy dźwięk, technologia EAX (echa, pogłosy, inne cyfrowe efekty dźwiękowe), budżetowa, Sound Blaster Live
+
+
+Współczesne karty dźwiękowe
+ - generator dźwięku (generator FM)
+ - pamięć ROM
+ - przetworniki AC, CA
+ - mikser dźwięku
+ 
+MIDI
+ - #####
+ 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Kompresja dźwięku - standard MP3
+
+Kompresje stratne - MPEG1 (dla filmu, ale miał kanał dźwięku) - mp3, Ogg Vorbis, mpeg4 - aac
+
+mp3 był swego czasu opatentowany
+Ogg powstał jako alternatywa - wymaga mocniejszych obliczeniowo, ale lepszy
+mpeg4 - definiuje również standard dźwięku (AAC)
+AAC > MP3
+AAC lepiej kompresuje wysokie częstotliwości (bo mp3 lubi je wyciąć)
+
+mp3 - mpeg layer 3
+
+1987 - rozpoczęcie prac nad mp3
+ - początkowo miał być dla kodowania sygnałów audio stacji nadawczych
+1987 - 1990
+kompresja 11/13-krotna
+przepustowość - 130 kbit/s
+
+Psychoakustyka - fundamentalne założenie kompresji stratnych
+ - zakres słyszalny częstotliwości
+ - oryginalny zapis dźwięku - nie odbieramy go w pełni
+ - mózg jako filtr - uwypukla ważne informacje i odrzuca nadmiarowe
+ - teoria maskowania dźwięków - jesli dźwięk składa się ze zbliżonych częstotliwości lub jeden z tonów jest znacznie głośnejszy to inne tony mogą zostać niezarejestrowane
+ 
+

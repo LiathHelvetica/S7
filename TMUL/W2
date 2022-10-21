@@ -1,0 +1,144 @@
+Uśrednianie sygnałów EEG w celu wykrywania bodźców
+Uzależnione od koncentracji
+
+Jak wywołać koncentrację?
+ - Atrakcyjny interfejs (np. gra i jej interfejs, komunikacja obrazami, skojarzenia)
+
+Wykrywanie emocji
+Wykrywanie kłamstw
+
+Systemy affordable
+ - Emotive 
+   - "pająk z elektrodami"
+   - słony roztwór zamiast żelu 
+   - ~8 elektrod 
+   - rozmiar dla uśrednionej głowy
+   - roztwór z czasem zmienia właściwości więc to działa max godzinę
+   - oprogramowanie do samodzielnych analiz
+ 
+ - NeuroSky
+   - 3 elektrody
+   - Sygnały głównie z czoła więc ciężko mówić o zbieraniu EEG
+   - rozbudowane oprogramowanie, mało programowalne
+   - sygnały na action units - wskaźniki określające ruchy twarzy
+   - działa średnio
+   
+Przetwrzanie sygnałów dźwiękowych
+
+Dźwięk - specyficzny sygnał, bo odbieramy go dziwnie
+nie da się stosować algorytmów ogólnych
+Kompresja poprzez minimalizacje błędu (matematycznie) nie działała
+Można z dźwięku dużo wyrzucić, ale jeśli to będą niepostrzegalne dla ucha rzeczy to to będzie dobre
+
+Dźwięk lepiej analizuje się w dzedzinie częstotliwości
+Jedyna łatwość wynika z jednowymiarowości - dźwięk zmienia się tylko w czasie
+
+Ograniczenia przetwarzania analogowego sygnałów
+(...........)
+###############
+
+Sygnał dźwiękowy
+ - sygnał analogowy
+   - sygnał ciągły
+   - sygnał dykretny (pseudo-analogowy)
+ - sygnał cyfrowy (spróbkowany i skwantowany)
+ 
+Konwersja sygnału analogowego na cyfrowy
+Rozdzielczość przetworników analogowo-cyfrowych
+  - kwantyzacja
+
+
+Cyfrowe przetwarzanie sygnałów
+Zwykle In -> Procesor -> Out
+Tu In -> A/D -> Procesor -> D/A -> Out
+
+Tracimy dużo informacji przy samym przetworzeniu na cyfrowy (niekoniecznie potrzebnej)
+Sygnał cyfrowy można kodować na przeróżny sposób
+
+mp3 - stratny
+bezstratny (względem postaci cyfrowej)
+
+Zalety CPS
+ - łatwość przetwarzania, przechowywania, transmisji
+ 
+Wady CPS
+ - skończona precyzja przetworników
+ - nagłe zmiany
+ - złożone metody
+ - ograniczenia związane z czasem, ale od ostatnich 10 lat jest o wiele lepiej niż było
+ 
+ 
+dedykowane procesory i układy logiczne
+
+Formaty przechowywania plików 
+Kontenery multimedialne - można umieścić wiele informacji acz większość jest związana z danym typem
+ - wma, wmv, avi, ogg, mpeg-4 (nie wszystkie są stricte do dźwięku)
+ 
+Co to jest dźwięk
+Jak się rozchodzi
+Jakie ma właściwości
+
+Prędkość dźwięku zależy od gęstości ośrodka
+Słyszalny zakres częstotliwości
+
+Niskie dźwięki ciężej lokalizwać
+Rozstawienie głośników ma więc większe znaczenie w przypadku wysokich dźwięków (z tego samego powodu nietoperze są w stanie lokalizować muchy)
+
+Infradźwięki
+Ultradźwięki
+
+Szkodliwość infradźwięków, tak czy nie?
+
+Złożonośc ucha
+Modele są jeszcze niedokładne
+
+Degradacja ucha z wiekiem
+
+Zakres słyszalności - natężenie od częstotliwości
+Względne postrzeganie głośności w zależności od częstotliwości (i vice versa)
+
+
+Trudność w odebraniu ile razy dżwięk jest głośniejszy - problem szczególnie dla różnych częstotliwości
+
+Moc akustyczna - ###
+Natężenie dźwięku - ### (lepszy jako miara głoścności)
+
+Miara głoścności - dB - odniesienie do najmniejszego możliwego słyszalnego natężenia
+
+Ciśnienie akustyczne
+
+Zakres słyszalności
+Psychoakustyka
+ - wrażenia głośności zależą od czasu trwania dźwięku
+ - przyzwyczajanie się do głośności (adaptacj głośności)
+ - sumowanie głośności - dźwięki złożone odbierane są jako głośniejsze przy tym samym ciśnieniu akustycznym
+ 
+Rozkład dźwięku na tony (sinusoidy)
+tj. analiza częstotliwościowa
+
+Wrażenie wysokości nie jest liniowo zależne od częstotliwości
+Złożone sygnały nawet jeśli są złożeniem irytujących tonów są mnie irytujące od swoich składowych
+
+
+Analiza widmowa nie określa fazy (?)
+Jesteśmy wrażliwi na duże zmiany fazy
+
+Interwały muzyczne i oktawy
+
+Oktawy można poprawnie klasyfikować do 5kHz
+Powyżej 2,5kHz występują błędy
+Po 5kHz nie rozpoznajemy melodii
+
+Harmoniczne (parzyste i nieparzyste) - wpływ na barwę dźwięku
+c na pianinie i gitarze mają te same częsttliwości
+
+Transjenty
+ - nabrzmiewanie
+ - wybrzmiewanie
+ 
+Charakterystyka dźwięku - wido amplitudowe
+Maksymalnie płaskie widmo aplitudowe sprawia, że ...
+
+Charkterystyka fazowa powinna być maksymalnie liniowa w funkcji częstotliwości
+
+Przesuwanie fazowe składowych wpływa na dźwięk nawet jeżeli się to uwzględni w złożonym już dżwięku
