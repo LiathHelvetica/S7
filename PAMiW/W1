@@ -1,0 +1,223 @@
+Wykład 1
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Bartosz Chaber
+
+Wykład od 08:30
+
+15 wykładów
+
+HTTP
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Kolokwium zaliczeniowe na ostatnich zajęciach
+Brak egzaminu
+25.5/50 zalicza wykład
+
+Egzamin zerowy na 14 zajęciach (dla każdego)
+
+Pytania testowe i otwarte (scenariusze i historyjki)
+
+Można mieć ze sobą materiały (tylko na kartkach)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Można zaproponować temat do poruszenia na 13 wykładzie - podsumowującym
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+HTTP - słowniczek
+
+HTTP - protokół rozmowy między klientem i serwerem
+bezstanowy (u podstaw, bez użycia dodatkowych mechanizmów, bo oczywiście ciastka istnieją)
+tekstowy
+klient inicjuje rozmowę
+Forma - pytanie -> odpowiedź
+serwer WWW przekazuje polecenie dalej do serwera aplikacji, które wykonuje faktyczne żądanie
+serwery WWW mogą radzić sobie z pewnymi prostymi żądaniami (np. weź zasób/stronę) 
+Czasem są połączone
+
+żądanie
+odpowiedź
+klient
+serwer WWW (serwer HTTP)
+serwer aplikacji
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Na wykładzie skupimy się na HTTP 1.1 - trochę starszy, ale "przyjemniejszy"
+
+Standardowy numer portu: 80
+
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Forma żądania (istnieją różnice między protokołami, ale to jest ich wspólny mianownik)
+
+"
+VERB / Id zasobu / Wersja protokołu
+Nagłówki
+"
+
+HTTP verb - co chcielibyśmy zrobić
+
+GET (weź), POST (pobierz)
+
+Identyfikator zasobu - bardzo szerokie pojęcie, jest to reprezentacja danych ogólnie rzecz biorąc, identyfikator czegoś co jest po stronie serwera
+
+Nagłówki - precyzują żądanie
+Nagłówek Host jest obowiązkowy
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Forma odpowiedzi
+
+"
+Nazwa_protokoło Status_odpowiedzi Nazwa_statusu
+Nagłówki
+Treść
+"
+
+Status odpowiedzi - 3 cyfrowa liczba określająca status operacji
+200 - OK (Nazwa statusu)
+
+Content-Type - określa przeglądarce co stanie się z treścią (text/html, plaintext)
+Lista dopuszczalnych Content-Type'ów
+
+Server - określa serwer z którego leci odpowiedź
+
+Content-Length - liczba bajtów
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+HTML - klient ma wiedzieć co z tym zrobić
+curl jest klientem HTTP
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+HTTP przesyła plaintextem
+HTTPS szyfruje żądania i odpowiedzi
+Bezpieczne (dopóki nikt nie wykradnie certyfikatu)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Chcemy przekazać dane do podanego zasobu
+
+POST /upload HTTP/1.1
+Host: ...
+Content-Length: N - liczba bajtów, które chcemy przekazać
+
+(treść)
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Czasowniki HTTP - zgodne z konwencją
+
+(CRUDy)
+
+GET - pobiera dane
+POST - utworzenie zasobu
+PUT - modyfikacja zasobu
+DELETE - usunięcie zasobu
+
+OPTIONS - 
+HEAD
+PATCH
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Idempotentność - cecha żądania - określa czy można je bezpiecznie powtórzyć
+
+Czy wielokrotne żądanie będzie mieć efekt taki sam jak pojedyncze
+
+Co jeśli żądanie nie dojdzie
+
+Co jeśli żądanie się zatnie i będziemy chcieli ponowić żądanie
+
+Żądanie Idempotentność
+GET         TAK 
+POST        NIE 
+PUT         TAK
+DELETE      TAK
+
+"Czy chcesz ponowić zapytanie" - ostrzeżenie o braku idempotentności
+Złożenie dwóch zamówień przez brak idempotentności POST
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Numery statusów odpowiedzi
+
+1xx - informacyjne
+2xx - przetwarzanie zakończone pomyślnie
+3xx - przekierowania
+4xx - błąd po stronie klienta
+5xx - błąd po stronie srewera
+
+100 - continue
+101 - switching protocols
+200 - OK
+201 - Created
+204 - No content
+301 - Moved permanently (btw curl ma opcję podążania za przekierowaniami, przeglądarki podobnież)
+400 - Bad request
+401 - Unauthorized
+404 - Not found
+500 - Internal Server Error
+501 - Not implemented
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Negocjacja treści
+
+Nagówki mogą zmieniać naturę odpowiedzi
+
+Accept - lista typów danych w ciele odpowiedzi, które chcemy
+To jest sugestia
+
+Accept-Encoding - akceptowalne kompresjonowanie danych
+
+User-Agent - Przedstawienie przeglądarki
+
+Można kłamać w nagłówkach
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Przeglądarki są dostosowane pod HTML
+
+Klient wczytując HTML jest w stanie wykonać kolejne żądania 
+
+np. podłączone pliki css'owe
+np. <link rel="stylecheet" ... />
+
+Dokument HTML nie powinien nieść informacji odnośnie wyglądu a jedynie semantyki (co jest czym)
+Słabym jest to, że te regułę można nagiąć. Nie powinniśmy
+
+Dobry HTML jest pomocny dla osób ograniczonych
+
+Hiperłącza - odnośniki do innych dokumentów 
+
+Ambiguous structure (<div> soup) vs Identifiable sections (Semantic markup)
+
+HTML 5 - znaczniki precyzujące czym są
+np. <nav>
+Większa precyzja względem semantyki
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+HTTP 1.1 (tekstowy, TCP) (1997)
+HTTP 2 (binarny, TCP) (2015)
+HTTP 3 (binarny, QUIC) (2022)
+
+HTTP 1.1 - dosyć sekwencyjny (pytanie -> odpowiedź), spore opóźnienia
+HTTP 2 i 3 - mitygacja tego
+
+HTTP 2 - korzystanie z jednego połączenia do paru żądań
+HTTP 2 + Push - Od razu dodanie zasobów do odpowiedzi
+
+Metody i nagłówki pozostają stałe między wersjami
+Semantyka pozostaje stała
+
+

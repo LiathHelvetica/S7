@@ -1,0 +1,66 @@
+JS
+ - dynamicznie typowany
+ - ustandaryzowany
+ - główny język skryptowy przeglądarek
+ - oparty o prototypy
+ 
+W rzadkch przypadkach JS może być wyłączony
+Warto jest założyć, że JSa nie ma i mieć jakieś minimum aplikacji + patrz poprzedni wykład i kwestie tagów HTMLowych
+
+JS to nie jest typowo obiektowy język
+ - prototypy
+ 
+Referencje działają trochę dziwnie. Działają w oparciu o przyjmowanie prototypu
+
+Silnik JSa jest mocno zbindowany z operowaniem na przeglądarce
+
+getTelementByID
+createElement
+addChild
+
+JS odpalany jest w sandboxie - brak dostępu do wielu opcji OSowych w sposób bezpośredni
+
+window - dostęp do manipulacji przeglądarką
+document - zrenderowany dokument HTML
+
+Pobieranie wartości z DOMu, dynamiczna manipulacja DOMem
+
+JS opisuje zachowanie elementów
+Eventy - określenie zachowania na jakąś akcję
+Elementy wysyłają sygnały, które można pzechwycić
+Propagacja eventów, zatrzymywanie eventów
+
+Anonimowe funkcje
+
+
+Asynchroniczne zapytania HTTP tworzone przez przeglądarkę
+Ajax
+Co oznacza asynchroniczne? - bez aktywnego czekania
+
+Kod po lewej - tradycyjny kod asynchroniczny (xhr)
+ - obiekt request
+ - określenie funkcji reakcji (na każdą zmianę stanu)
+ - send request
+ 
+Kod po prawej - Bardziej nowe podejście (fetch)
+
+JSON
+funkcje nie są serialzowane
+parsowanie
+
+Sztywność konstrukcji XMLa
+
+Najprościej jest przesyłać dane w query zaytania
+Format queriesów
+Max dłuość URLa - zależnie od przeglądarki 2kB do 2MB	
+
+Znaki specjalne w URLach - encodowanie
+
+Zawieranie danych w body
+W body mamy dowolność formatu
+
+Content-Type - pomoc dla serwera jaki jest format danych
+Content-Length - kiedy serwer ma przestać czytać
+
+Multipart/form-data
+Format pozwalający nam wysyłać pliki binarne oraz dane tekstowe (równocześnie)

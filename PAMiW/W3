@@ -1,0 +1,81 @@
+Polityka tego samego miejsca pochodzenia
+
+mechanizm blokowania żądań z innych miejsc pochodzenia
+
+Proste żądania zostaną wykonane (simple request)
+Bardziej złożone będą blokowane (not-so-simple request)
+
+Pochodzenie - origin - domena, protokół, numer portu
+
+Proste zapytanie - bające się wyzwolić przy użyciu elementów <form> i <img>
+Dopuszczalne metody: HEAD, GET, POST
+Dopuszczalne nagłówki: Accept, Accept-Language, Content-Language, Content-Type (niektóre wartości)
+
+ustawienie serwera na niskim porcie sprawia (np. 80 - domyślny), że może on zostać stworzony tyko z poziomu administratora
+
+Simple request:
+Przeglądarki blokują odpowiedzi z źle okreslonych originów
+
+Not-so-simple-request
+np. DELETE np. request jsonowe
+Te requesty mogą być blokowane przez serwer jeśli pochodzenie/format requesta nie jest w zgodzie z polityką
+To się wywala na handshake'u (preflight request) (OPTIONS - zapytanie określające na co serwer nam pozwoli)
+
+Access-Control-Allow-Origin - jakim pochodzeniom ufa serwer
+
+CORS - cross origin resource sharing
+
+Częsta praktyka - jedynie zaimplementowane przez nas pochodzenia mogą się ze sobą komunikować
+www.application.com <-> api.application.com
+
+Można oczywiście udawać inne pochodzenie
+
+Access-Contro-Request-Headers - jaki format będzie miał mój request (preflights)
+
+Access-Control-Allow-Origin trezeba wysyłać jako header dwa razy
+
+Odbieraj zapytania z dowolnych pochodzeń, ale niebezpieczeństwo cross site scripting
+Access-Control-Allow-Origin="*"
+
+Obietnice - użycie często eliminuje piekło zagnieżdżeń
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Sesja
+
+Bezstanowność - serwer http nie pamięta o wcześniejszych żądaniach
+Nie ma znaczenia do której kopii serwera pójdzie żądanie - skalowalność protokołu http
+
+Stan zasobów (przechowywana w trwałym magazynie danych np. bazie danych, klient nie ma bezpośredniego dostępu)
+Stan aplikacji (nie trzymany przez serwer, określa komunikację klient serwer - sesja, przechowywana po stronie klienta lub serwera)
+
+Stan aplikacji warto powierzac użytkownikom gdy serwis jest duży
+
+Ciastka (stan aplikacji po stronie klienta) lub trzymanie sesji (stan aplikacji po stronie serwera)
+
+Ciastka często trzyma się w mniejszych, a szybszych magazynach danych
+
+Zdarzają się implementacje, które "wysyłają hasło za każdym razem, więc za każdyn razem następuje logowanie"
+Authorization: Basic [ciąg znaków - zakodowane login i hasło - base64(login:pass)]
+
+Nagłówek Cookie i Set-Cookie
+Cookie - wysłanie stanu od klienta
+Set-Cookie - zapisz proszę stan po stronie klienta
+
+Cookie: session=3nfds4; key=pair ...; Secure
+Identyfikator sesji - tj. token
+
+Max rozmiar cistka: 4kB
+
+Znane parametry ciastek
+ścieżka, domena, flagi, data ważności
+
+Przeglądarki zwykle automatycznie usuwają ciastka
+
+Kradzież tokenów sesji
+
+Ciastki mają flagi np. HttpOnly, Secure
+HttpOnly - nie ma obowiązku zapisania tej wartości
+Secure - upewnij się, że ciastko będzie zaszyfrowane przy wysyłce
+
+implementacje uuid - unikalne idki z bardzo dużą szansą
