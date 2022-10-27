@@ -1,0 +1,40 @@
+Żetony kryptograficzne
+
+JWT - reprezentacja roszczeń
+
+Autoryzacja - jakie masz prawa?
+
+Żeton ma zakodowane dane - można je odkodować (to nie jest szyfrowanie)
+np. base64
+
+standardowe pola żetonów
+"sub" - identyfikacja użytkownika (jakiego użytkownika reprezentuje żeton)
+"aud" - dla kogo jest ten żeton (identyfikator serwisu np. twitter.com)
+"exp" - expiration date
+"iss" - kto wydał żeton
+dowolne inne pola, które chcemy zaszyć w tokenie
+
+Nagłówek
+Body
+Sygnatura
+
+Nagłówek
+"typ" - najczęsciej po prostu wpisane "JWT"
+"alg" - określa algorytm podpisu
+
+Sygnatura
+hash(base64(header) + "." + base64(body))
+
+Żeton zawiera wszystkie konieczne dane i jest podpisany
+
+Żetony można hashować, można też kodować (aplikacja może szyfrować żetont, a backend je weryfikować - klucz publiczny jest udostępniany)
+
+W hashowaniu uzywa się samego pieprzu, raczej nie sięga się po sól - niewielki zysk na bezpieczeństwie - brak problemu możliwości uzycia tablic tęczowych
+
+Żetonów nie powinniśmy trzymać w bazie danych - bo po co? - Tylko dodatkowe niebezpieczeństwo
+Powinno się w takim razie ustawiać datę ważności
+
+Nie da się unieważnić żetonu przeto - problem z wylogowaniem
+
+Przeroczyste żetony
+JWT nie są przezroczyste bo posiadają zaszyte dane
