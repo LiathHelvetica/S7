@@ -1,0 +1,129 @@
+Maskowanie - podstawa mp3
+przesłanianie sąsiadujących sygnałów
+
+Maskowanie równoczesne
+Maskowanie czasowe
+
+Maskowanie równoczesne
+ - Dźwięki o podobnych częstotliwościach mogą się przesłaniać niezależnie od amplitudy - wyrzucamy ten o mniejszej. Gdy różnica częstotliwości jest znaczna technika nie działa
+ - nazwa ze względu na to, że sygnały występują w tej samej chwili czsaowej
+
+Podobieństwo częstotliwości jest uzależnione od obranego modelu psychakustycznego
+ 
+Maskowanie czasowe (nawet częściej stosowany)
+ - Krzywa słyszalności na podstawie tonu maskującego (nietypowy kształt - 3ms wznoszenia, 100ms opadania)
+ - Krzywa określa co jest przesłaniane (słabe dźwięki pod krzywą)
+ 
+Zaczynamy od kompresji stratnej
+Potem bezstratna (Huffman)
+
+Sygnał wejściowy
+Podział na ramki ######################################################
+#																	#
+Transformata														Podzakresy	
+Model psychoakustyczny (maskowanie)									Zmodyfikowana t. kosinusowa
+			#										#################
+			Pętla (bit-rate - ile ma trwać zapis na dysku)
+			Model mówi, które współczynniki są dobre
+			Jeżeli bit/rate jest za mały to kontynuujemy wyrzucanie współczynników
+			Huffman
+			Formatowanie końcowe
+			Zapis
+			
+W ramkach wyznaczane są tony maskujące - tony potrafią wpływać na sąsiednie ramki
+Jeżeli krzywa słyszalności przecina jakiś ton to staje się on kandydatem do wyrzucenia (patrz pętla bit-rate)
+
+Dyskretna transformata cosinusowa
+Składowe rzeczywiste (Fourier - R i C) i cosinusowe (Fourier - sin i cos)
+Wszystkie składowe są znaczące (Fourier - połowa)
+(wzór)
+
+Transformata odwrotna
+Taka sama formuła
+Wygodne względem hardware'u
+
+Dobra transformata dla kompresji - duża liczba współczynników bliska zeru (dlaczego? - o dziwo nie ma konsensusu - co ciekawe transformata sinusowa nie ma takiej właściwości)
+Dużo wycinania wysokich częstotliwości (one są w pierwszeństwie do wycięcia)
+
+Na granicach ramek powstają zniekształcenia (trzaski)
+
+Głos rządzi się swoimi regułami i jest bardziej specyficzny od muzyki
+Różnice w priorytetach
+
+Zmodyfikowana dyskretna transformata cosinusowa
+Zakładkowa - Ramki (okna) na siebie nachodzą
+Walka z trzaskami
+
+Jest więcej transformat zmodyfikowanych określonych dla standardu mp3
+ - której się używa jest kwestią wyboru algorytmu
+ 
+TDAC - likwidacja niechcianych współczynników poprzez powyższą operację
+ 
+MDCT - 
+Nieciągłości na łączeniach prostokątnych okien
+Okno - mnożenie przez pewną funkcję - zniekształca to sygnał, ale łączy na złączeniach
+Ale nadal warto
+Okna muszą w mp3 spełniać pewne warunki - są różne
+mp3 - okno sinusoidalne
+vorbis - zmodyfikowany sinus
+
+Kodowanie Huffmana
+Oparty o prawdopodobieństwo symboli (bajtów)
+
+Strumień bitowy (bitrate)
+Parametr kompresji
+Liczba bitów na sekundę nagrania
+Kompromis między jakoscią a rozmiarem
+
+Tryb cbr i vbr
+cbr - constant bitrate
+vbr - variable
+Niektóre częsci mogą być mniej lub bardziej dynamiczne - wprowadzono więc vbr
+vbr - przedział np. 96 - 128 (nigdy 0)
+
+Kodek lain
+
+Rezerwa bitowa
+Istnieją ramki w których niewiele jest do kodowania - ciche fragmenty, cisza
+Można przenieść kodowanie skomplikowanych ramek do mniej skomplikowanych - wykorzystać miejsce z nich jako rezerwę
+
+joint stereo
+############
+############
+############
+Kodowanie różnicy kanałów L i P zamiast osobno
+Suma i różnica potrafią istotniej przekazać informacje (redundancja)
+
+Standard MP3 określa format plików wyjściowych
+Nagłówek - Znaczniki ID3 (metadane)
+Ramki + nagłówki ramek
+
+Zalety i wady
+######
+######
+######
+######
+
+########################################################################
+
+Efekty dźwiękowe
+
+Echo
+Wziąć sygnał, przesunąć, opcjonalnie ściszyć i dodać obydwa do siebie
+
+
+Pogłos
+Echo ale w pętli - to prosty schemat istnieja bardziej skomplikowane (celumące w symulację konkretnych pomieszczeń - współczynniki tłumienia ścian, symulacja ustawienia mikrofonu i źródeł dźwięku)
+
+
+Zmiana skali czasu
+"szybciej" i "wolniej"
+Zmienia się podstawowy ton i szybkość
+Jak zmienić częstotliwość bez szybkości mówienia - ###
+Jak zmienić prędkość mówienia bez zmiany częstotliwości - ###
+
+Wielokrotne echo + przesunięcia częstotliwości
+Nazwał to chórem, ale bardziej brzmi jakby go opętało
+
+
+
