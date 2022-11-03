@@ -1,0 +1,113 @@
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Powiadomienia
+
+Problem trwałości połączenia - ile utrzymywać połączenie
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Rozwiązanie 1) Cykliczne odpytywanie
+
+Implementowane po stronie klienta
+
+W kliencie JSowym można to łatwo zaimplementować metodą window.setInterval
+
+window.clearInterval
+
+Zalety:
+1) Małe obciążenie serwera
+
+Wady:
+1) Zależność od parametru - co ile odpytywać
+ - za mały - czas rzeczywisty, ale za duże obciążenie jak na zysk
+ - za duży - opóźnienia w synchronizacji
+2) Za każdym razem musimy przeprowadzić pełną komunikację HTTP (a przecież use case wymagałby jednego handshake'a)
+
+204 - NoContent - brak zmian
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Rozwiązanie 2) Long polling
+
+Serwer po swojej stronie czeka - może w tym czasie coś się zmieni
+
+Jak długo czeka? 
+ - Przeglądarki same z sieie mogą zerwać połączenie jak jest za długie
+ - Serwer powinien sam z siebie przerwać połączenie jak jest za długie
+ 
+Tak - zerwać
+Przeglądarka ponawia zerwane połączenie
+Powinniśmy ponowić połączenie również w razie pozytywnej odpowiedzi
+
+Zalety:
+
+Wady:
+ - duże obciążenie wątków
+ - 
+ 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Rozwiązanie 3) Server-Sent Events
+
+-> Czy coś się zmieniło
+<- Nagłówki: Transfer-Encoding: chunked, Content-Type: text/event-stream
+(chunked - odpowiedź będzie w kawałkach)
+(text/event-stream - kawałki będą strumieniem tekstowym)
+(serwer czeka aż coś się zmieni - nie blokując wątku preferowalnie)
+<- data 1 z określonym typem
+(połączenie nie zostaje zerwane)
+<- data 2 z określonym typem
+
+Wady:
+ - konieczność obsługi odbierania "kawałków wiadomości"
+ -
+ 
+Zalety:
+ - brak blokowania wątków
+ - Automatyczna obsługa odnawiania połączenia - klient wysyła nagłówek Last-Event-Id (chyba taki jest ten nagłówek?)
+ -
+ 
+Format eventów
+id: 
+event: (określony przez API typ)
+data: 
+
+Konsumpcja strumienia wiadomości
+var es = new EventSource("/events");
+es.addEventListnere("event-type", e => handleEvent(e));
+
+Nie wszystkie przeglądarki wspierają EventSource
+Trzeba zaimplementować samemu
+ - XHR Streaming
+ 
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Rozwiązanie 4) WebSockets
+
+Rozwiązanie nie oparte o HTTP
+
+101 - SwitchingProtocols
+
+WebSockets - dwukierunkowy protokół binarny (może ale nie musi być to szyfrowane)
+Parsowanie HTTP może mieć narzut w aplikacjach wymagających czasu rzeczywistego
+
+==> HTTP Request (np. "/ws")
+<== 101 - SwitchingProtocols
+<=> WebSocket (ws://example.com/socket) (wss - szyfrowane)
+
+
+var ws = new WebSocket("ws://...")
+ws.addEventListener("type", e => handleEvent(e))
+ws.sendEvent (...)
+
+Klsayczne powiadomienia realizowane na websocketach to lekki overkill
+
+WebSockety wymagają dwóch serwerów - jeden HTTP i jeden WS
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+Facebook przez dłuższy czas uzywał long pollingu
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+"Znacie mnie już na tyle długo aby wiedzieć, że jestem prymitywnym człowiekiem. Dlatego w swojej aplikacji użyłem bazy danych Redis"
